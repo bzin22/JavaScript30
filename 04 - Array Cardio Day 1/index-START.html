@@ -38,29 +38,75 @@
     
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    let fifteen = inventors.filter(function(person) {
+      if(person.year >=1500 && person.year <1600){
+        return true;
+      }else{
+        return false;
+      }
+    });
+
+    console.table(fifteen);
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    let firstLast = inventors.map(person => `${person.first} ${person.last}`);
+
+    console.table(firstLast);
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
 
+    let oldestYoungest = inventors.sort((a,b) => (a.year>b.year) ? 1 : -1); 
+
+    console.table(oldestYoungest);
+
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
 
+    let total = inventors.reduce((sum, person) => (person.passed - person.year) + sum, 0);
+
+    console.log(total);
+
     // 5. Sort the inventors by years lived
+    let yearsLived = inventors.sort((a,b) => (a.passed - a.year)>(b.passed - b.year) ? -1 : 1);
+
+    console.table(yearsLived);
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
+    // let category = (document.querySelectorAll(".mw-category a"));
+    // let links = Array.from(category);
+
+    // let deList = links.map(links => links.textContent).filter(street => street.includes("de"));
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    let lastName = people
+                    .map(persons => persons.toLowerCase())
+                    .sort();
+
+    console.table(lastName);
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
 
+    let unique = Array.from(new Set(data));
+
+    console.log(unique);
+
+    let totals = data.reduce((sum, vehicles) => {
+      if(sum[vehicles]){
+        sum[vehicles]++;
+      }else{
+        sum[vehicles]=1;
+      }
+      return sum;
+    }, {});
+
+    console.log(totals);
   </script>
 </body>
 </html>
